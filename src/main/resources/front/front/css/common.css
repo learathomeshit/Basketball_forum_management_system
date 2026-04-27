@@ -20,3 +20,39 @@
 /**
  * 工具类css end
  */
+
+/**
+ * 对比度可读性修复
+ * 统一修复“深底深字 / 浅底浅字”导致的难辨认问题
+ */
+.index-title,
+.index-title span {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+}
+
+.recommend .box > .title,
+.recommend .box > .title > span {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+}
+
+.news-container .btn-container .title,
+.forum-container .btn-container .title {
+    color: #1f2d3d !important;
+    font-weight: 600;
+}
+
+.news-container .btn-container .title,
+.news-container .btn-container .title *,
+.forum-container .btn-container .title,
+.forum-container .btn-container .title * {
+    text-shadow: none !important;
+}
+
+/* 列表/详情里部分灰底标签原为白字，实际对比度偏低 */
+.message,
+.layui-badge,
+.layui-badge-rim {
+    color: #1f2d3d !important;
+}

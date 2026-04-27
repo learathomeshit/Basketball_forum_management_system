@@ -37,8 +37,8 @@
 			color: #2a8a15;
 			box-sizing: border-box;
 			height: 70px;
-			background: #1E5069;
-			box-shadow: 0 1px 6px rgba(0,0,0,.3);
+			background: linear-gradient(135deg, #1E5069, #2a6e90);
+			box-shadow: 0 8px 20px rgba(0,0,0,.22);
 			justify-content: center;
 			position: relative;
 			z-index: 1;
@@ -89,8 +89,8 @@
 			align-items: center;
 			box-sizing: border-box;
 			height: 60px;
-			background: #ffff;
-			box-shadow: 0 1px 6px rgba(0,0,0,0);
+			background: #fff;
+			box-shadow: 0 4px 16px rgba(30,80,105,0.08);
 			justify-content: center;
 		}
 		#header .navs1 {
@@ -136,15 +136,16 @@
 			margin: 0 10px;
 			color: rgba(0, 0, 0, 1);
 			font-size: 16px;
-			border-radius: 16px;
-			border-width: 4px;
+			border-radius: 999px;
+			border-width: 1px;
 			border-style: solid;
-			border-color: rgba(184, 184, 184, 1);
-			background-color: rgba(207, 207, 207, 0.78);
-			box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.21) inset;
+			border-color: rgba(219, 228, 236, 1);
+			background-color: rgba(255, 255, 255, 1);
+			box-shadow: 0 3px 10px rgba(30,80,105,0.08);
 			text-align: center;
 			box-sizing: border-box;
 			cursor: pointer;
+			transition: all .25s ease;
 		}
 		#header .navs li a{
 			color: inherit;
@@ -156,24 +157,25 @@
 			color: inherit;
 		}
 		#header .navs li.current {
-			color: rgba(0, 0, 0, 1);
+			color: #fff;
 			font-size: 16px;
-			border-radius: 16px;
-			border-width: 4px;
+			border-radius: 999px;
+			border-width: 1px;
 			border-style: solid;
-			border-color: rgba(184, 145, 104, 1);
-			background-color: rgba(30, 80, 105, 0.69);
-			box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.21) inset;
+			border-color: rgba(30, 80, 105, 1);
+			background-color: rgba(30, 80, 105, 1);
+			box-shadow: 0 10px 20px rgba(30,80,105,0.25);
 		}
 		#header .navs li:hover {
 			color: #fff;
 			font-size: 16px;
-			border-radius: 16px;
-			border-width: 4px;
+			border-radius: 999px;
+			border-width: 1px;
 			border-style: solid;
-			border-color: rgba(184, 145, 104, 1);
-			background-color: rgba(30, 80, 105, 0.69);
-			box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.21) inset;
+			border-color: rgba(30, 80, 105, 1);
+			background-color: rgba(30, 80, 105, 1);
+			box-shadow: 0 10px 20px rgba(30,80,105,0.25);
+			transform: translateY(-1px);
 		}
 	</style>
 	<body>

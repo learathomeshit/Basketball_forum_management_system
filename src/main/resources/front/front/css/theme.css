@@ -263,3 +263,188 @@
 .layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after {
     border-bottom: 2px solid #ce0b07;
 }
+
+/* -------- Unified minimal theme (NBA/ESPN style) -------- */
+:root {
+	--ui-accent: #e10600;
+	--ui-text: #111827;
+	--ui-subtext: #6b7280;
+	--ui-border: #e5e7eb;
+	--ui-bg: #f7f8fa;
+	--ui-card: #ffffff;
+}
+
+body {
+	background: var(--ui-bg);
+	color: var(--ui-text);
+}
+
+.recommend .box > .title,
+.index-title,
+.title {
+	background: var(--ui-card) !important;
+	border: 1px solid var(--ui-border) !important;
+	border-left: 4px solid var(--ui-accent) !important;
+	color: var(--ui-text) !important;
+	border-radius: 8px !important;
+	box-shadow: none !important;
+}
+
+.recommend .box > .title span,
+.index-title span {
+	color: inherit !important;
+	text-shadow: none !important;
+}
+
+.layui-form.filter,
+.btn-container {
+	background: var(--ui-card) !important;
+	border: 1px solid var(--ui-border) !important;
+	border-radius: 8px !important;
+	box-shadow: none !important;
+}
+
+.btn-submit,
+.btn-theme,
+.layui-btn-normal,
+.btn-warm {
+	background: var(--ui-accent) !important;
+	color: #fff !important;
+	border-color: var(--ui-accent) !important;
+}
+
+.layui-btn-primary {
+	background: #fff !important;
+	color: var(--ui-text) !important;
+	border: 1px solid var(--ui-border) !important;
+}
+
+.news-container .title,
+.forum-container .title,
+.news-container .auth-container,
+.forum-container .auth-container,
+.data-container .data-list .data-item .title {
+	color: var(--ui-text) !important;
+}
+
+.news-container .auth-container,
+.forum-container .auth-container {
+	border-bottom: 1px solid var(--ui-border) !important;
+}
+
+.data-container .data-list .data-item,
+.news-container .news-list .news-item,
+.forum-container .forum-list .forum-item {
+	background: var(--ui-card);
+	border: 1px solid var(--ui-border) !important;
+	border-radius: 8px;
+}
+
+.forum-container .forum-list .forum-item:hover,
+.forum-container .forum-list .forum-item.line:hover {
+	background: #f3f4f6 !important;
+	color: var(--ui-text) !important;
+}
+
+.forum-container .forum-list .forum-item .create-time,
+.news-container .auth-container,
+.forum-container .auth-container,
+.news-container .news-list .news-item .detail-container .create-time {
+	color: var(--ui-subtext) !important;
+}
+
+.forum-container .content,
+.news-container .content {
+	background: var(--ui-card);
+	border: 1px solid var(--ui-border);
+	border-radius: 8px;
+	padding: 16px;
+}
+
+.forum-container .btn-container,
+.news-container .btn-container,
+.forum-container .bottom-container,
+.news-container .bottom-container {
+	background: var(--ui-card) !important;
+	border: 1px solid var(--ui-border) !important;
+	border-radius: 8px !important;
+}
+
+.forum-container .bottom-container .btn,
+.news-container .bottom-container .btn {
+	background: var(--ui-accent) !important;
+	color: #fff !important;
+	border-radius: 6px;
+}
+
+.layui-input,
+.layui-textarea {
+	border: 1px solid var(--ui-border) !important;
+	border-radius: 6px !important;
+}
+
+.layui-input:focus,
+.layui-textarea:focus {
+	border-color: #cbd5e1 !important;
+	box-shadow: 0 0 0 3px rgba(225, 6, 0, 0.08);
+}
+
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+	background: var(--ui-accent) !important;
+}
+
+/* -------- Personal center: override legacy brown/blue -------- */
+.center-container .layui-nav-tree .layui-nav-item {
+	color: var(--ui-text) !important;
+	border: 1px solid var(--ui-border) !important;
+	border-radius: 8px !important;
+	background: var(--ui-card) !important;
+	box-shadow: none !important;
+}
+
+.center-container .layui-nav-tree .layui-nav-item + .layui-nav-item {
+	margin-top: 10px;
+}
+
+.center-container .layui-nav-tree .layui-nav-item.layui-this,
+.center-container .layui-nav-tree .layui-nav-item:hover {
+	color: var(--ui-text) !important;
+	border-color: rgba(225, 6, 0, 0.35) !important;
+	background: #fff !important;
+}
+
+.center-container .layui-nav-tree .layui-nav-item.layui-this a,
+.center-container .layui-nav-tree .layui-nav-item:hover a {
+	color: var(--ui-text) !important;
+}
+
+.center-container .left-container,
+.center-container .right-container {
+	background: transparent !important;
+}
+
+.right-container .layui-input {
+	box-shadow: none !important;
+	border: 1px solid var(--ui-border) !important;
+	border-radius: 6px !important;
+}
+
+.right-container .layui-form-item {
+	border-bottom: 1px solid var(--ui-border) !important;
+}
+
+/* Forum comment area: avoid content overflow */
+.forum-container .message-list,
+.forum-container .message-list .message-item,
+.forum-container .message-list .content {
+	overflow: hidden;
+}
+
+.forum-container .message-list .message {
+	display: block !important;
+	max-width: calc(100% - 52px);
+	white-space: normal !important;
+	word-break: break-word;
+	overflow-wrap: anywhere;
+	line-height: 1.7;
+}

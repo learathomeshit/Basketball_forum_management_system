@@ -58,6 +58,19 @@
 		.forum-container .btn-container button i {
 			margin-right: 4px;
 		}
+		.forum-container .message-list .message {
+			display: block !important;
+			max-width: 100% !important;
+			margin: 8px 0 0 0 !important;
+			white-space: normal !important;
+			word-break: break-word !important;
+			overflow-wrap: anywhere !important;
+			line-height: 1.8;
+			box-sizing: border-box;
+		}
+		.forum-container .message-list .content {
+			overflow: hidden;
+		}
 	</style>
 	<body style="padding-bottom: 20px">
 
@@ -73,7 +86,10 @@
 			<div class="layui-carousel" id="swiper" :style='{"boxShadow":"0 0 6px #608090","margin":"0 auto","borderColor":"rgba(0,0,0,.3)","borderRadius":"0px","borderWidth":"0","width":"100%","borderStyle":"solid"}'>
 			  <div carousel-item id="swiper-item">
 				<div v-for="(item,index) in swiperList" :key="index">
-					<img style="width: 100%;height: 100%;object-fit:cover;" :src="item.img" />
+					<div style="position: relative; width: 100%; height: 100%; overflow: hidden; background-color: #000;">
+						<div :style="{'backgroundImage': 'url(' + item.img + ')', 'backgroundSize': 'cover', 'backgroundPosition': 'center', 'filter': 'blur(15px)', 'position': 'absolute', 'width': '110%', 'height': '110%', 'top': '-5%', 'left': '-5%', 'zIndex': '0', 'opacity': '0.7'}"></div>
+						<img style="width: 100%; height: 100%; object-fit: contain; position: relative; zIndex: '1';" :src="item.img" />
+					</div>
 				</div>
 			  </div>
 			</div>
@@ -192,29 +208,25 @@
 					limit: 5
 				}, function(res) {
 					if (res.data.list.length > 0) {
-						var swiperItemHtml = '';
-						for (let item of res.data.list) {
-							if (item.name.indexOf('picture') >= 0 && item.value && item.value != "" && item.value != null) {
-								swiperItemHtml +=
-									'<div>' +
-									'<img class="swiper-item" src="' + http.baseurl+item.value + '">' +
-									'</div>';
+						let swiperList = [];
+						res.data.list.forEach(element => {
+							if (element.value != null) {
+								swiperList.push({ img: http.baseurl + element.value });
 							}
-						}
-						jquery('#swiper-item').html(swiperItemHtml);
-						// 轮播图
+						});
+						vue.swiperList = swiperList;
+
 						vue.$nextTick(() => {
-						  carousel.render({
-						  	elem: '#swiper',
-							width: '100%',
-						  	height: '350px',
-						  	arrow: 'hover',
-						  	anim: 'default',
-						  	autoplay: 'true',
-						  	interval: '3000',
-						  	indicator: 'outside'
-						  });
-						
+							carousel.render({
+								elem: '#swiper',
+								width: '100%',
+								height: '350px',
+								arrow: 'hover',
+								anim: 'default',
+								autoplay: 'true',
+								interval: '3000',
+								indicator: 'outside'
+							});
 						})
 					}
 				});

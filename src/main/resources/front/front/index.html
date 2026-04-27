@@ -32,14 +32,15 @@
 		#header .nav-top {
 			display: flex;
 			align-items: center;
-			padding: 0 20px;
+			padding: 0 24px;
 			font-size: 16px;
 			color: #2a8a15;
 			box-sizing: border-box;
-			height: 70px;
-			background: linear-gradient(135deg, #1E5069, #2a6e90);
-			box-shadow: 0 8px 20px rgba(0,0,0,.22);
-			justify-content: center;
+			height: 52px;
+			background: #0b0d12;
+			box-shadow: 0 4px 14px rgba(0,0,0,.20);
+			border-bottom: 1px solid rgba(255,255,255,.06);
+			justify-content: flex-start;
 			position: relative;
 			z-index: 1;
 		}
@@ -57,17 +58,27 @@
 		}
 
 		#header .nav-top-title {
-			line-height: 40px;
-			font-size: 24px;
-			color: rgba(255, 255, 255, 1);
-			padding: 0 10px;
-			margin: 0 10px;
-			border-radius: 6px;
+			line-height: 34px;
+			font-size: 21px;
+			font-weight: 700;
+			font-style: italic;
+			letter-spacing: .8px;
+			color: #fff;
+			padding: 2px 14px;
+			margin: 0;
+			border-radius: 4px;
 			border-width: 0;
 			border-style: solid;
 			border-color: rgba(0,0,0,.3);
-						background-color: rgba(0,0,0,0);
-						box-shadow: 0 0 0px rgba(0,0,0,.3);
+			background-color: #e10600;
+			box-shadow: 0 2px 8px rgba(225,6,0,.28);
+			font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+			transform: skewX(-8deg);
+			transform-origin: left center;
+		}
+		#header .nav-top-title span {
+			display: inline-block;
+			transform: skewX(8deg);
 		}
 
 		#header .nav-top-tel {
@@ -89,8 +100,9 @@
 			align-items: center;
 			box-sizing: border-box;
 			height: 60px;
-			background: linear-gradient(180deg, #101a29, #0b1422);
-			box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+			background: #0b0d12;
+			box-shadow: 0 2px 0 rgba(255,255,255,.04) inset;
+			border-bottom: 1px solid rgba(255,255,255,.06);
 			justify-content: center;
 		}
 		#header .navs1 {
@@ -134,18 +146,18 @@
 			line-height: 40px;
 			padding: 0 15px;
 			margin: 0 10px;
-			color: #d9e4f2;
+			color: #d1d5db;
 			font-size: 16px;
-			border-radius: 999px;
-			border-width: 1px;
+			border-radius: 0;
+			border-width: 0 0 3px 0;
 			border-style: solid;
-			border-color: rgba(63, 86, 118, 1);
-			background-color: rgba(16, 29, 47, 0.95);
-			box-shadow: 0 4px 14px rgba(0,0,0,0.28);
+			border-color: transparent;
+			background-color: transparent;
+			box-shadow: none;
 			text-align: center;
 			box-sizing: border-box;
 			cursor: pointer;
-			transition: all .25s ease;
+			transition: color .2s ease, border-color .2s ease;
 		}
 		#header .navs li a{
 			color: inherit;
@@ -159,23 +171,23 @@
 		#header .navs li.current {
 			color: #fff;
 			font-size: 16px;
-			border-radius: 999px;
-			border-width: 1px;
+			border-radius: 0;
+			border-width: 0 0 3px 0;
 			border-style: solid;
-			border-color: #ff5b3a;
-			background: linear-gradient(135deg, #e7462c, #ff6b45);
-			box-shadow: 0 10px 22px rgba(231,70,44,0.38);
+			border-color: #d10a00;
+			background: transparent;
+			box-shadow: none;
 		}
 		#header .navs li:hover {
 			color: #fff;
 			font-size: 16px;
-			border-radius: 999px;
-			border-width: 1px;
+			border-radius: 0;
+			border-width: 0 0 3px 0;
 			border-style: solid;
-			border-color: #ff5b3a;
-			background: linear-gradient(135deg, #e7462c, #ff6b45);
-			box-shadow: 0 10px 22px rgba(231,70,44,0.38);
-			transform: translateY(-1px);
+			border-color: rgba(209,10,0,0.75);
+			background: transparent;
+			box-shadow: none;
+			transform: none;
 		}
 	</style>
 	<body>
@@ -183,7 +195,7 @@
 		<div id="header">
 			<div v-if='true' class="nav-top">
 			  <img v-if='false' class="nav-top-img" src='https://www.baidu.com/img/flexible/logo/pc/result@2.png'>
-			  <div v-if="true" class="nav-top-title">{{projectName}}</div>
+			  <div v-if="true" class="nav-top-title"><span>{{projectName}}</span></div>
 			  <div class="nav-top-tel"></div>
 			</div>
 					    <div class="navs">

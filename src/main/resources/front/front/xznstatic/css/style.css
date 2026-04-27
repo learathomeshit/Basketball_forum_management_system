@@ -595,3 +595,183 @@ select:focus,
 	border-color: var(--xzn-primary-dark) !important;
 	background: linear-gradient(135deg, var(--xzn-primary-dark), var(--xzn-primary)) !important;
 }
+
+/* -------- Minimal ESPN-like refresh -------- */
+body {
+	background: #f7f8fa;
+}
+
+#iframe {
+	background: #f7f8fa;
+}
+
+.news.index-pv2 {
+	background: #f7f8fa !important;
+}
+
+.news.index-pv2 .newsIdea {
+	display: none !important;
+}
+
+.news.index-pv2 .box {
+	width: min(1100px, 92vw) !important;
+}
+
+.news.index-pv2 .box .title {
+	margin: 10px auto 20px !important;
+	padding: 12px 16px !important;
+	border: 1px solid #e5e7eb !important;
+	border-left: 4px solid #e10600 !important;
+	border-radius: 8px !important;
+	background: #ffffff !important;
+	color: #111827 !important;
+	text-shadow: none !important;
+	align-items: flex-start !important;
+}
+
+.news.index-pv2 .box .title span:first-child {
+	font-size: 20px !important;
+	font-weight: 700 !important;
+	letter-spacing: 0;
+}
+
+.news.index-pv2 .box .title span:last-child {
+	font-size: 15px !important;
+	color: #4b5563 !important;
+}
+
+.new9-list-item {
+	padding: 18px !important;
+	margin: 10px 1.5% !important;
+	width: 47% !important;
+	height: auto !important;
+	min-height: 165px;
+	border: 1px solid #e5e7eb !important;
+	border-radius: 8px !important;
+	background: #ffffff !important;
+	box-shadow: 0 2px 10px rgba(17, 24, 39, 0.06) !important;
+}
+
+.new9-list-item:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px rgba(17, 24, 39, 0.1) !important;
+}
+
+.new9-list-item-title {
+	color: #111827 !important;
+	font-weight: 700;
+	line-height: 1.45 !important;
+}
+
+.new9-list-item-time {
+	background: #f3f4f6 !important;
+	color: #6b7280 !important;
+	border-radius: 999px !important;
+	padding: 0 10px !important;
+}
+
+.new9-list-item-descript {
+	color: #4b5563 !important;
+}
+
+.new9-list-item-identification {
+	border-radius: 999px !important;
+	background: #e10600 !important;
+	color: #fff !important;
+	font-weight: 600;
+}
+
+@media (max-width: 900px) {
+	.new9-list-item {
+		width: 100% !important;
+		margin: 10px 0 !important;
+	}
+}
+
+/* -------- ESPN unified tokens (xzn pages) -------- */
+:root {
+	--espn-accent: #e10600;
+	--espn-text: #111827;
+	--espn-subtext: #6b7280;
+	--espn-border: #e5e7eb;
+	--espn-bg: #f7f8fa;
+	--espn-card: #ffffff;
+}
+
+body {
+	background: var(--espn-bg) !important;
+	color: var(--espn-text) !important;
+}
+
+.recommend,
+.news,
+.lists {
+	background: var(--espn-bg) !important;
+}
+
+.recommend .box,
+.news .box,
+.lists .box {
+	width: min(1100px, 92vw) !important;
+}
+
+.recommend .box .title,
+.news .box .title,
+.lists .box .title {
+	background: var(--espn-card) !important;
+	border: 1px solid var(--espn-border) !important;
+	border-left: 4px solid var(--espn-accent) !important;
+	border-radius: 8px !important;
+	box-shadow: none !important;
+}
+
+.recommend .box .title span,
+.news .box .title span,
+.lists .box .title span {
+	color: var(--espn-text) !important;
+	text-shadow: none !important;
+}
+
+.recommend .box .filter {
+	background: var(--espn-card) !important;
+	border: 1px solid var(--espn-border) !important;
+	border-radius: 8px !important;
+}
+
+.recommend .box .filter .item-list .lable {
+	color: var(--espn-subtext) !important;
+}
+
+.recommend .box .list .list-item-body,
+.recommend .box .news .list-item .list-item-body,
+.news .box .list .list-item .list-item-body,
+.lists .box .swiper-slide {
+	background: var(--espn-card) !important;
+	border: 1px solid var(--espn-border) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 2px 10px rgba(17, 24, 39, 0.06) !important;
+}
+
+.recommend .box .news .list-item .list-item-body .item-info .name,
+.recommend .box .news .list-item .list-item-body .item-info .time {
+	color: var(--espn-text) !important;
+}
+
+.layui-btn,
+.btn-theme,
+.btn-submit,
+.layui-btn-normal {
+	background: var(--espn-accent) !important;
+	border-color: var(--espn-accent) !important;
+	color: #fff !important;
+}
+
+.layui-btn-primary {
+	background: #fff !important;
+	border: 1px solid var(--espn-border) !important;
+	color: var(--espn-text) !important;
+}
+
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+	background: var(--espn-accent) !important;
+}

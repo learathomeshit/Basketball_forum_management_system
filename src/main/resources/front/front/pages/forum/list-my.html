@@ -79,7 +79,9 @@
 
 			<div class="forum-container">
 				<div style="text-align:right;margin:0 0 10px 0;">
-					<button type="button" class="layui-btn layui-btn-primary" onclick="window.history.back();">返回上一页</button>
+					<button :style='{"padding":"0 15px","boxShadow":"0 0 8px rgba(0,0,0,0)","margin":"0 0 0 10px","borderColor":"#409EFF","backgroundColor":"#E10600 !important","color":"#fff","borderRadius":"4px","borderWidth":"0","width":"auto","fontSize":"14px","borderStyle":"solid","height":"40px"}' onclick="window.history.back()" type="button" class="layui-btn layui-btn-lg btn-theme">
+						<i v-if="true" class="layui-icon">&#xe65c;</i> 返回上一页
+					</button>
 				</div>
 				<table class="layui-table" lay-skin="nob">
 					<thead>

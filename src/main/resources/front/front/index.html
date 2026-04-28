@@ -15,9 +15,9 @@
 		}
 		#iframe {
 			width: 100%;
-			margin-top: 70px;
-						padding-top: 60px;
-					}
+			margin-top: 64px;
+			padding-top: 0px;
+		}
 		#header {
 			height: auto;
 			background: #fff;
@@ -30,19 +30,7 @@
 		}
 
 		#header .nav-top {
-			display: flex;
-			align-items: center;
-			padding: 0 24px;
-			font-size: 16px;
-			color: #2a8a15;
-			box-sizing: border-box;
-			height: 52px;
-			background: #0b0d12;
-			box-shadow: 0 4px 14px rgba(0,0,0,.20);
-			border-bottom: 1px solid rgba(255,255,255,.06);
-			justify-content: flex-start;
-			position: relative;
-			z-index: 1;
+			display: none; /* 隐藏原本的顶部行 */
 		}
 
 		#header .nav-top-img {
@@ -58,27 +46,15 @@
 		}
 
 		#header .nav-top-title {
-			line-height: 34px;
-			font-size: 21px;
-			font-weight: 700;
-			font-style: italic;
-			letter-spacing: .8px;
-			color: #fff;
-			padding: 2px 14px;
-			margin: 0;
-			border-radius: 4px;
-			border-width: 0;
-			border-style: solid;
-			border-color: rgba(0,0,0,.3);
-			background-color: #e10600;
-			box-shadow: 0 2px 8px rgba(225,6,0,.28);
-			font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
-			transform: skewX(-8deg);
-			transform-origin: left center;
+			height: 64px;
+			display: flex;
+			align-items: center;
+			padding: 0 20px;
+			margin-right: 20px;
 		}
-		#header .nav-top-title span {
-			display: inline-block;
-			transform: skewX(8deg);
+		#header .nav-top-title img {
+			height: 48px;
+			width: auto;
 		}
 
 		#header .nav-top-tel {
@@ -96,14 +72,14 @@
 
 		#header .navs {
 			display: flex;
-			padding: 0 20px;
+			padding: 0 50px;
 			align-items: center;
 			box-sizing: border-box;
-			height: 60px;
+			height: 64px;
 			background: #0b0d12;
-			box-shadow: 0 2px 0 rgba(255,255,255,.04) inset;
+			box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 			border-bottom: 1px solid rgba(255,255,255,.06);
-			justify-content: center;
+			justify-content: flex-start; /* 改为靠左对齐，模仿 Gitee */
 		}
 		#header .navs1 {
 			width: 200px;
@@ -193,14 +169,8 @@
 	<body>
 		<!-- start 顶部导航栏 -->
 		<div id="header">
-			<div v-if='true' class="nav-top">
-			  <img v-if='false' class="nav-top-img" src='https://www.baidu.com/img/flexible/logo/pc/result@2.png'>
-			  <div v-if="true" class="nav-top-title"><span>{{projectName}}</span></div>
-			  <div class="nav-top-tel"></div>
-			</div>
-					    <div class="navs">
-		    	<!-- <div class="logo" style="font-size: 20px;top: 32px;color: #fff;font-weight: bold;margin-left: -200px;width: 240px;" v-text="projectName"></div> -->
-				<div class="title" v-if="false" v-text="projectName"></div>
+			<div class="navs">
+				<div class="nav-top-title"><img src="./img/logo_espn3.png"></div>
 				<div class="list">
 					<ul>
 						<li class='current'><a href="javascript:navPage('./pages/home/home.html')" class="menumain"><i v-if="false" class="layui-icon layui-icon-home"></i>首页</a></li>
@@ -209,7 +179,7 @@
 						<li><a :href="adminurl" target="_blank" class="menumain" style="cursor: pointer;"><i v-if="false" class="layui-icon layui-icon-link"></i>后台管理</a></li>
 					</ul>
 				</div>
-		    </div>
+			</div>
 								</div>
 		<!-- end 顶部导航栏 -->
 

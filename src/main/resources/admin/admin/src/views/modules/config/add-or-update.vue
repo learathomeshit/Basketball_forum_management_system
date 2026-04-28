@@ -194,122 +194,42 @@ export default {
       });
     },
     // 提交
+    // 找到 onSubmit 方法进行替换
     onSubmit() {
+      this.$refs["ruleForm"].validate(valid => {
+        if (valid) {
+          // --- 新增逻辑：确保轮播图路径包含 upload/ 前缀 ---
+          if (this.ruleForm.name.indexOf('swiper') >= 0 && this.ruleForm.value) {
+            // 如果返回的是新上传的图片名，没有前缀，则手动加上
+            if (this.ruleForm.value.indexOf('upload/') != 0) {
+              this.ruleForm.value = 'upload/' + this.ruleForm.value;
+            }
+          }
+          // --------------------------------------------
 
-
-
-
-	if(this.ruleForm.value!=null) {
-		this.ruleForm.value = this.ruleForm.value.replace(new RegExp(this.$base.url,"g"),"");
-	}
-
-var objcross = this.$storage.getObj('crossObj');
-
-      //更新跨表属性
-       var crossuserid;
-       var crossrefid;
-       var crossoptnum;
-       if(this.type=='cross'){
-                var statusColumnName = this.$storage.get('statusColumnName');
-                var statusColumnValue = this.$storage.get('statusColumnValue');
-                if(statusColumnName!='') {
-                        var obj = this.$storage.getObj('crossObj');
-                       if(!statusColumnName.startsWith("[")) {
-                               for (var o in obj){
-                                 if(o==statusColumnName){
-                                   obj[o] = statusColumnValue;
-                                 }
-                               }
-                               var table = this.$storage.get('crossTable');
-                             this.$http({
-                                 url: `${table}/update`,
-                                 method: "post",
-                                 data: obj
-                               }).then(({ data }) => {});
-                       } else {
-                               crossuserid=this.$storage.get('userid');
-                               crossrefid=obj['id'];
-                               crossoptnum=this.$storage.get('statusColumnName');
-                               crossoptnum=crossoptnum.replace(/\[/,"").replace(/\]/,"");
-                        }
+          this.$http({
+            url: `config/${!this.ruleForm.id ? "save" : "update"}`,
+            method: "post",
+            data: this.ruleForm
+          }).then(({ data }) => {
+            if (data && data.code === 0) {
+              this.$message({
+                message: "操作成功",
+                type: "success",
+                duration: 1500,
+                onClose: () => {
+                  this.parent.showFlag = true;
+                  this.parent.addOrUpdateFlag = false;
+                  this.parent.configCrossAddOrUpdateFlag = false;
+                  this.parent.search(); // 提交成功后调用父组件刷新列表
                 }
+              });
+            } else {
+              this.$message.error(data.msg);
+            }
+          });
         }
-       this.$refs["ruleForm"].validate(valid => {
-         if (valid) {
-		 if(crossrefid && crossuserid) {
-			 this.ruleForm.crossuserid = crossuserid;
-			 this.ruleForm.crossrefid = crossrefid;
-			let params = { 
-				page: 1, 
-				limit: 10, 
-				crossuserid:this.ruleForm.crossuserid,
-				crossrefid:this.ruleForm.crossrefid,
-			} 
-			this.$http({ 
-				url: "config/page", 
-				method: "get", 
-				params: params 
-			}).then(({ 
-				data 
-			}) => { 
-				if (data && data.code === 0) { 
-				       if(data.data.total>=crossoptnum) {
-					     this.$message.error(this.$storage.get('tips'));
-					       return false;
-				       } else {
-					 this.$http({
-					   url: `config/${!this.ruleForm.id ? "save" : "update"}`,
-					   method: "post",
-					   data: this.ruleForm
-					 }).then(({ data }) => {
-					   if (data && data.code === 0) {
-					     this.$message({
-					       message: "操作成功",
-					       type: "success",
-					       duration: 1500,
-					       onClose: () => {
-						 this.parent.showFlag = true;
-						 this.parent.addOrUpdateFlag = false;
-						 this.parent.configCrossAddOrUpdateFlag = false;
-						 this.parent.search();
-						 this.parent.contentStyleChange();
-					       }
-					     });
-					   } else {
-					     this.$message.error(data.msg);
-					   }
-					 });
-
-				       }
-				} else { 
-				} 
-			});
-		 } else {
-			 this.$http({
-			   url: `config/${!this.ruleForm.id ? "save" : "update"}`,
-			   method: "post",
-			   data: this.ruleForm
-			 }).then(({ data }) => {
-			   if (data && data.code === 0) {
-			     this.$message({
-			       message: "操作成功",
-			       type: "success",
-			       duration: 1500,
-			       onClose: () => {
-				 this.parent.showFlag = true;
-				 this.parent.addOrUpdateFlag = false;
-				 this.parent.configCrossAddOrUpdateFlag = false;
-				 this.parent.search();
-				 this.parent.contentStyleChange();
-			       }
-			     });
-			   } else {
-			     this.$message.error(data.msg);
-			   }
-			 });
-		 }
-         }
-       });
+      });
     },
     // 获取uuid
     getUUID () {

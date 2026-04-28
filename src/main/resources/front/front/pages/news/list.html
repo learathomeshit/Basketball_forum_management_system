@@ -456,6 +456,19 @@
 		.list7 .list-item-body .tag {
 			box-sizing: border-box;
 		}
+		/* 强制搜索框占位文字居中 */
+		.item-list input::-webkit-input-placeholder {
+			text-align: center;
+		}
+		.item-list input:-moz-placeholder {
+			text-align: center;
+		}
+		.item-list input::-moz-placeholder {
+			text-align: center;
+		}
+		.item-list input:-ms-input-placeholder {
+			text-align: center;
+		}
 </style>
 <body>
   <div id="app">
@@ -514,8 +527,7 @@
 	    </div>
 	    <form class="layui-form filter" :style='{"padding":"10px","boxShadow":"0 0 0px rgba(255,0,0,.8)","margin":"10px 0 10px 0","borderColor":"rgba(0,0,0,.3)","backgroundColor":"rgba(184, 145, 104, 1)","borderRadius":"4px","alignItems":"flex-end","borderWidth":"0","borderStyle":"solid","justifyContent":"flex-end","height":"60px"}'>
                         <div class="item-list">
-                                <div class="lable" :style='{"padding":"0 10px","boxShadow":"0 0 6px rgba(255,0,0,0)","margin":"0","borderColor":"rgba(0,0,0,0)","backgroundColor":"transparent","color":"#fff","borderRadius":"0","textAlign":"right","borderWidth":"0","width":"auto","fontSize":"16px","borderStyle":"solid"}'>标题</div>
-                                <input type="text" :style='{"boxShadow":"0 0 6px rgba(255,0,0,0)","borderColor":"#ccc","backgroundColor":"#fff","color":"#333","borderRadius":"8px","textAlign":"center","borderWidth":"2px","width":"140px","fontSize":"14px","borderStyle":"solid","height":"40px"}' name="title" id="title" placeholder="标题" autocomplete="off" class="layui-input">
+                                <input type="text" :style='{"padding":"0 !important","boxShadow":"0 0 6px rgba(255,0,0,0)","borderColor":"#ccc","backgroundColor":"#fff","color":"#333","borderRadius":"8px","textAlign":"center","borderWidth":"2px","width":"140px","fontSize":"14px","borderStyle":"solid","height":"40px"}' name="title" id="title" placeholder="标题" autocomplete="off" class="layui-input">
                         </div>
                         <button :style='{"padding":"0 15px","boxShadow":"0 0 8px rgba(0,0,0,0)","margin":"0 0 0 10px","borderColor":"#409EFF","backgroundColor":"rgba(97, 132, 150, 1)","color":"#fff","borderRadius":"4px","borderWidth":"0","width":"auto","fontSize":"14px","borderStyle":"solid","height":"40px"}' id="btn-search" type="button" class="layui-btn layui-btn-normal">
                           	<i class="layui-icon layui-icon-search"></i>搜索
@@ -527,7 +539,7 @@
 				<div class="infos">
 					<div class="title" :style='{"padding":"0","boxShadow":"0 0 6px rgba(0,0,0,0)","margin":"0","borderColor":"rgba(0,0,0,0)","backgroundColor":"rgba(0,0,0,0)","color":"#333","borderRadius":"0","borderWidth":"0","width":"100%","lineHeight":"24px","fontSize":"16px","borderStyle":"solid"}'>{{item.title}}</div>
 					<div class="desc" :style='{"padding":"0","boxShadow":"0 0 0px rgba(0,0,0,0)","margin":"10px 0","borderColor":"rgba(0,0,0,0)","backgroundColor":"rgba(0,0,0,0)","color":"#666","borderRadius":"0","borderWidth":"0","width":"100%","lineHeight":"24px","fontSize":"14px","borderStyle":"solid"}'>{{item.introduction}}</div>
-					<div class="tag" :style='{"padding":"0 12px","boxShadow":"0 0 0px rgba(0,0,0,0)","margin":"0","borderColor":"rgba(0,0,0,0)","backgroundColor":"rgba(97, 132, 150, 1)","color":"#fff","borderRadius":"4px","borderWidth":"0","width":"72px","lineHeight":"24px","fontSize":"12px","borderStyle":"solid"}'>新闻动态</div>
+					<div class="tag" :style='{"padding":"0 12px","boxShadow":"0 0 0px rgba(0,0,0,0)","margin":"0","borderColor":"rgba(0,0,0,0)","backgroundColor":"#0b0d12","color":"#fff","borderRadius":"4px","borderWidth":"0","width":"72px","lineHeight":"24px","fontSize":"12px","borderStyle":"solid"}'>新闻动态</div>
 				</div>
 			</div>
 		</div>

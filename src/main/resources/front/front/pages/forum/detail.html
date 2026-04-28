@@ -69,7 +69,17 @@
 			box-sizing: border-box;
 		}
 		.forum-container .message-list .content {
-			overflow: hidden;
+			height: auto !important;
+		}
+		.forum-container .message-list .message {
+			display: block !important;
+			height: auto !important;
+			min-height: 20px;
+			max-width: 100% !important;
+			white-space: normal !important; /* 强制换行 */
+			word-break: break-all !important;
+			overflow-wrap: break-word !important;
+			line-height: 1.6;
 		}
 	</style>
 	<body style="padding-bottom: 20px">
@@ -113,6 +123,12 @@
 				<div class="content" v-html="detail.content">
 				</div>
 				
+				<div class="btn-container" :style='{"padding":"10px","boxShadow":"0 0 0px rgba(255,0,0,.8)","margin":"10px 0 10px 0","borderColor":"rgba(0,0,0,.3)","backgroundColor":"rgba(255, 255, 255, 0)","borderRadius":"4px","alignItems":"flex-end","borderWidth":"0","borderStyle":"solid","justifyContent":"flex-end","height":"60px"}'>
+					<button :style='{"padding":"0 15px","boxShadow":"0 0 8px rgba(0,0,0,0)","margin":"0 0 0 10px","borderColor":"#409EFF","backgroundColor":"#E10600","color":"#fff","borderRadius":"4px","borderWidth":"0","width":"auto","fontSize":"14px","borderStyle":"solid","height":"40px"}' onclick="window.history.back()" type="button" class="layui-btn layui-btn-lg btn-theme">
+						<i v-if="true" class="layui-icon">&#xe65c;</i> 返回列表
+					</button>
+				</div>
+				
 				<div class="btn-container" :style='{"padding":"10px","boxShadow":"0 0 0px rgba(255,0,0,.8)","margin":"10px 0 10px 0","borderColor":"rgba(0,0,0,.3)","backgroundColor":"rgba(184, 145, 104, 1)","borderRadius":"4px","alignItems":"flex-end","borderWidth":"0","borderStyle":"solid","justifyContent":"flex-end","height":"60px"}'>
 					<div class="title" style="color:#666;font-size: 18px;">
 						评论列表
@@ -145,16 +161,19 @@
 					</div>
 				</div> -->
 				
-				<div class="message-list" v-if="dataList&&dataList.length" :style='{"padding":"0 20px 20px","boxShadow":"0 0 6px #638596","margin":"0","borderColor":"rgba(255,0,0,.3)","backgroundColor":"#fff","borderRadius":"4px","borderWidth":"0","borderStyle":"solid"}'>
-					<div :style='{"padding":"20px 0","boxShadow":"0 0 6px #bcbcbc","margin":"0","borderColor":"rgba(255, 0, 0, 0)","backgroundColor":"#fff","borderRadius":"0","borderWidth":"0 0 1px 0","borderStyle":"solid"}'  class="message-item" v-for="(item,index) in dataList" v-bind:key="index" >
-						<div class="username-container" style="display: flex;align-items: center;">
-							<img :style='{"boxShadow":"0 0 6px #bcbcbc","margin":"0 10px 0 0","borderColor":"rgba(0,0,0,.3)","borderRadius":"100%","borderWidth":"0","width":"40px","borderStyle":"solid","height":"40px"}' class="avator" src="../../img/avator.png">
-							<span style="display: inline-block;" :style='{"padding":"0 10px","boxShadow":"0 0 6px #bcbcbc","margin":"0","borderColor":"rgba(0,0,0,.3)","backgroundColor":"#fff","color":"#333","borderRadius":"4px","borderWidth":"0","width":"auto","lineHeight":"28px","fontSize":"14px","borderStyle":"solid"}' class="username">用户：{{item.username}}</span>
+				<!-- 评论列表 -->
+				<div class="message-list" v-if="dataList&&dataList.length" :style='{"padding":"20px 0","margin":"20px 0 0","borderColor":"#eee","backgroundColor":"#fff","borderRadius":"8px","borderWidth":"1px","borderStyle":"solid"}'>
+					<div :style='{"padding":"15px 20px","margin":"0","borderColor":"#f0f0f0","backgroundColor":"#fff","borderWidth":"0 0 1px 0","borderStyle":"solid","display":"flex","flexDirection":"column"}' class="message-item" v-for="(item,index) in dataList" v-bind:key="index" >
+						<!-- 用户信息 -->
+						<div class="username-container" style="display: flex;align-items: center;margin-bottom: 10px;">
+							<img :style='{"margin":"0 12px 0 0","borderRadius":"50%","width":"36px","height":"36px","objectFit":"cover"}' class="avator" src="../../img/avator.png">
+							<span :style='{"color":"#666","fontSize":"14px","fontWeight":"bold"}' class="username">{{item.username}}</span>
 						</div>
-						<div class="content" class="content" style="margin: 0;flex: 1;">
-							<span style="display: inline-block;" :style='{"padding":"8px","boxShadow":"0 0 6px #bcbcbc","margin":"8px 0 0 50px","borderColor":"rgba(0,0,0,.3)","backgroundColor":"rgba(188, 188, 188, 1)","color":"#fff","borderRadius":"4px","borderWidth":"0","fontSize":"14px","borderStyle":"solid"}' class="message">
+						<!-- 评论文字内容 -->
+						<div class="content" style="padding-left: 48px; width: 100%; box-sizing: border-box; height: auto !important;">
+							<div :style='{"padding":"12px 16px","backgroundColor":"#f8f8f8","color":"#333","borderRadius":"8px","fontSize":"15px","lineHeight":"1.6","wordBreak":"break-all","whiteSpace":"normal !important","height":"auto !important","minHeight":"24px","width":"100%","boxSizing":"border-box","display":"block !important"}' class="message">
 								{{item.content}}
-							</span>
+							</div>
 						</div>
 					</div>
 				</div>

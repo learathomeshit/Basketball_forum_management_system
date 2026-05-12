@@ -1,0 +1,187 @@
+/**
+ * 后台登录：明亮双栏 + NBA 素材（与前台用户登录视觉一致）。
+ * 依赖 login.vue 旧结构：.loginIn > .left.center > .login-form，data-v-7b052d47。
+ * 左栏通过 .left::before 实现，避免改打包 JS。
+ */
+#app .loginIn[data-v-7b052d47] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100vh !important;
+  padding: 32px 16px !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(
+    125deg,
+    #2f6fad 0%,
+    #4a8fd4 42%,
+    #e8f3fc 42%,
+    #f2f7fd 55%,
+    #f7fafc 100%
+  ) !important;
+  background-attachment: fixed !important;
+}
+
+#app .loginIn .left[data-v-7b052d47] {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  max-width: 920px !important;
+  height: auto !important;
+  min-height: 480px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  background: #fff !important;
+  border: none !important;
+  box-shadow: 0 18px 50px rgba(15, 45, 85, 0.12), 0 0 0 1px rgba(15, 45, 85, 0.06) !important;
+}
+
+#app .loginIn .left.center[data-v-7b052d47] {
+  transform: none !important;
+}
+
+#app .loginIn .left[data-v-7b052d47]::before {
+  content: "";
+  flex: 0 0 42%;
+  min-width: 260px;
+  box-sizing: border-box;
+  background-color: #e8f0fa;
+  background-image: url("../img/login-nba-wide.png");
+  background-repeat: no-repeat;
+  background-position: center 58%;
+  background-size: min(88%, 280px) auto;
+  border-right: 1px solid #e2e8f0;
+}
+
+@media (max-width: 720px) {
+  #app .loginIn .left[data-v-7b052d47] {
+    flex-direction: column !important;
+  }
+  #app .loginIn .left[data-v-7b052d47]::before {
+    flex: 0 0 auto !important;
+    min-height: 200px !important;
+    min-width: 0 !important;
+    border-right: none !important;
+    border-bottom: 1px solid #e2e8f0;
+    background-position: center 70%;
+  }
+}
+
+#app .loginIn .left .login-form[data-v-7b052d47] {
+  flex: 1 1 360px !important;
+  min-width: 0 !important;
+  padding: 40px 44px 48px !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  background: #fff !important;
+}
+
+#app .loginIn .left .title-container[data-v-7b052d47] {
+  text-align: left !important;
+  margin-bottom: 6px !important;
+}
+
+#app .loginIn .left .title-container .title[data-v-7b052d47] {
+  width: 100% !important;
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+  border-radius: 0 !important;
+  color: #1d428a !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#app .loginIn .left .el-form-item[data-v-7b052d47] {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 18px 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+#app .loginIn .left .el-form-item .el-input[data-v-7b052d47] input {
+  height: 46px !important;
+  line-height: 46px !important;
+  padding: 0 14px 0 40px !important;
+  color: #0f172a !important;
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 6px !important;
+}
+
+#app .loginIn .left .el-form-item .el-input[data-v-7b052d47] input:focus {
+  border-color: #1d428a !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(29, 66, 138, 0.12) !important;
+}
+
+#app .loginIn .left .el-form-item .svg-container[data-v-7b052d47] {
+  color: #64748b !important;
+  line-height: 46px !important;
+  height: 46px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#app .loginIn .role[data-v-7b052d47] .el-form-item__label {
+  color: #334155 !important;
+  margin: 0 0 8px 0 !important;
+  width: auto !important;
+  font-weight: 600 !important;
+}
+
+#app .loginIn .left .el-form-item[data-v-7b052d47] .el-radio__label {
+  color: #475569 !important;
+}
+
+#app .loginIn .left .el-form-item[data-v-7b052d47] .el-radio.is-checked .el-radio__label {
+  color: #1d428a !important;
+}
+
+#app .loginIn .left .el-form-item[data-v-7b052d47] .el-radio.is-checked .el-radio__inner {
+  border-color: #1d428a !important;
+  background: #1d428a !important;
+}
+
+#app .loginIn .loginInBt[data-v-7b052d47] {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 48px !important;
+  line-height: 48px !important;
+  margin: 12px 0 0 !important;
+  padding: 0 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  border-radius: 6px !important;
+  background: #1d428a !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#app .loginIn .role[data-v-7b052d47] .el-form-item__content {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px 16px !important;
+}
+
+#app .loginIn[data-v-7b052d47] .el-form-item__label {
+  color: #334155 !important;
+  font-weight: 600 !important;
+}

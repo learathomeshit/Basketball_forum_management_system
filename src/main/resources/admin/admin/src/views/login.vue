@@ -1,58 +1,64 @@
 <template>
   <div class="admin-login-page">
-    <div class="admin-login-bg" aria-hidden="true" />
-    <div class="admin-login-card">
-      <div class="admin-login-brand">
-        <h1 class="admin-login-title">篮球论坛系统</h1>
-        <p class="admin-login-sub">管理后台 · 安全登录</p>
+    <div class="admin-login-shell">
+      <div class="admin-login-card">
+        <div class="admin-login-brand">
+          <img class="brand-wide" :src="nbaWide" alt="NBA" />
+          <img class="brand-mark" :src="nbaMark" alt="" />
+          <p class="brand-tagline">篮球论坛系统</p>
+        </div>
+        <div class="admin-login-form-wrap">
+          <h2 class="welcome">欢迎回来</h2>
+          <p class="welcome-sub">请使用管理员账号登录</p>
+          <el-form
+            ref="loginForm"
+            class="admin-login-form"
+            label-width="0"
+          >
+            <el-form-item class="admin-field">
+              <span class="svg-wrap">
+                <svg-icon icon-class="user" />
+              </span>
+              <el-input
+                v-model="rulesForm.username"
+                name="username"
+                type="text"
+                auto-complete="on"
+                placeholder="请输入用户名"
+              />
+            </el-form-item>
+            <el-form-item class="admin-field">
+              <span class="svg-wrap">
+                <svg-icon icon-class="password" />
+              </span>
+              <el-input
+                v-model="rulesForm.password"
+                name="password"
+                type="password"
+                auto-complete="on"
+                placeholder="请输入密码"
+                show-password
+                @keyup.enter.native="login"
+              />
+            </el-form-item>
+            <el-form-item class="admin-role-row">
+              <span class="role-label">角色</span>
+              <el-radio-group v-model="rulesForm.role" class="role-group">
+                <el-radio
+                  v-for="item in backLoginMenus"
+                  :key="item.roleName"
+                  :label="item.roleName"
+                >{{ item.roleName }}</el-radio>
+              </el-radio-group>
+            </el-form-item>
+            <el-button
+              class="admin-login-btn"
+              native-type="button"
+              @click="login()"
+            >登录</el-button>
+          </el-form>
+        </div>
       </div>
-      <el-form
-        ref="loginForm"
-        class="admin-login-form"
-        label-width="0"
-      >
-        <el-form-item class="admin-field">
-          <span class="svg-wrap">
-            <svg-icon icon-class="user" />
-          </span>
-          <el-input
-            v-model="rulesForm.username"
-            name="username"
-            type="text"
-            auto-complete="on"
-            placeholder="请输入用户名"
-          />
-        </el-form-item>
-        <el-form-item class="admin-field">
-          <span class="svg-wrap">
-            <svg-icon icon-class="password" />
-          </span>
-          <el-input
-            v-model="rulesForm.password"
-            name="password"
-            type="password"
-            auto-complete="on"
-            placeholder="请输入密码"
-            show-password
-            @keyup.enter.native="login"
-          />
-        </el-form-item>
-        <el-form-item class="admin-role-row">
-          <span class="role-label">角色</span>
-          <el-radio-group v-model="rulesForm.role" class="role-group">
-            <el-radio
-              v-for="item in backLoginMenus"
-              :key="item.roleName"
-              :label="item.roleName"
-            >{{ item.roleName }}</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-button
-          class="admin-login-btn"
-          native-type="button"
-          @click="login()"
-        >登录</el-button>
-      </el-form>
     </div>
   </div>
 </template>
@@ -71,6 +77,8 @@ export default {
       },
       menus: [],
       tableName: "",
+      nbaWide: require("@/assets/img/login-nba-wide.png"),
+      nbaMark: require("@/assets/img/login-nba-mark.png"),
       codes: [{
         num: 1,
         color: '#000',
@@ -192,59 +200,94 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 16px;
-  position: relative;
-  overflow: hidden;
-  background: #0a0a0c;
+  padding: 32px 16px;
+  box-sizing: border-box;
+  background: linear-gradient(
+    125deg,
+    #2f6fad 0%,
+    #4a8fd4 42%,
+    #e8f3fc 42%,
+    #f2f7fd 55%,
+    #f7fafc 100%
+  );
+  background-attachment: fixed;
 }
 
-.admin-login-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(225, 6, 0, 0.28), transparent 55%),
-    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.04) 40px, rgba(255, 255, 255, 0.04) 41px),
-    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255, 255, 255, 0.04) 40px, rgba(255, 255, 255, 0.04) 41px);
-  pointer-events: none;
+.admin-login-shell {
+  width: 100%;
+  max-width: 920px;
 }
 
 .admin-login-card {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 420px;
-  padding: 36px 40px 40px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(18, 18, 22, 0.88);
-  box-shadow:
-    0 0 0 1px rgba(225, 6, 0, 0.12),
-    0 28px 56px rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(14px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(15, 45, 85, 0.12), 0 0 0 1px rgba(15, 45, 85, 0.06);
 }
 
 .admin-login-brand {
-  text-align: center;
-  margin-bottom: 28px;
+  flex: 1 1 300px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px 48px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #f0f7ff 0%, #e4eef8 55%, #dce8f4 100%);
+  border-right: 1px solid #e2e8f0;
 }
 
-.admin-login-title {
-  margin: 0 0 8px;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #f9fafb;
+.brand-wide {
+  width: min(280px, 88%);
+  height: auto;
+  object-fit: contain;
 }
 
-.admin-login-sub {
-  margin: 0;
-  font-size: 13px;
-  color: #9ca3af;
+.brand-mark {
+  width: 72px;
+  height: auto;
+  margin-top: 20px;
+}
+
+.brand-tagline {
+  margin: 20px 0 0;
+  font-size: 15px;
+  color: #1d428a;
+  font-weight: 600;
   letter-spacing: 0.12em;
+}
+
+.admin-login-form-wrap {
+  flex: 1 1 340px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 44px 48px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.welcome {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1d428a;
+}
+
+.welcome-sub {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: #64748b;
 }
 
 .admin-login-form {
   width: 100%;
+  max-width: 380px;
 }
 
 .admin-field {
@@ -259,7 +302,7 @@ export default {
     z-index: 2;
     display: flex;
     align-items: center;
-    color: #9ca3af;
+    color: #64748b;
     font-size: 16px;
   }
 
@@ -271,18 +314,20 @@ export default {
     height: 46px;
     line-height: 46px;
     padding-left: 42px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(0, 0, 0, 0.35);
-    color: #f3f4f6;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #f1f5f9;
+    color: #0f172a;
     font-size: 15px;
 
     &::placeholder {
-      color: #6b7280;
+      color: #94a3b8;
     }
 
     &:focus {
-      border-color: rgba(225, 6, 0, 0.55);
+      border-color: #1d428a;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(29, 66, 138, 0.12);
     }
   }
 }
@@ -302,7 +347,8 @@ export default {
 .role-label {
   flex: 0 0 auto;
   font-size: 14px;
-  color: #9ca3af;
+  font-weight: 600;
+  color: #334155;
 }
 
 .role-group {
@@ -312,20 +358,20 @@ export default {
 
 .admin-role-row & /deep/ .el-radio {
   margin-right: 16px;
-  color: #d1d5db;
+  color: #475569;
 }
 
 .admin-role-row & /deep/ .el-radio__input.is-checked + .el-radio__label {
-  color: #fff;
+  color: #1d428a;
 }
 
 .admin-role-row & /deep/ .el-radio__inner {
-  border-color: #6b7280;
+  border-color: #94a3b8;
 }
 
 .admin-role-row & /deep/ .el-radio__input.is-checked .el-radio__inner {
-  border-color: #e10600;
-  background: #e10600;
+  border-color: #1d428a;
+  background: #1d428a;
 }
 
 .admin-login-btn.el-button {
@@ -335,18 +381,26 @@ export default {
   padding: 0;
   font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.08em;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  background: linear-gradient(180deg, #ff1a1a, #c40000);
-  box-shadow: 0 10px 28px rgba(225, 6, 0, 0.35);
+  border-radius: 6px;
+  background: #1d428a;
+  box-shadow: none;
 
   &:hover,
   &:focus {
     color: #fff;
-    background: linear-gradient(180deg, #ff3d3d, #d60000);
+    background: #163a75;
     border-color: transparent;
+  }
+}
+
+@media (max-width: 720px) {
+  .admin-login-brand {
+    min-height: 220px;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
   }
 }
 </style>

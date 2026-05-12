@@ -29,7 +29,7 @@
 			   </div>
 			 </div> -->
 			<el-form-item label="密码" class="input" v-if="tableName=='yonghu'">
-			  <el-input v-model="ruleForm.mima" autocomplete="off" placeholder="密码" type="password"#elsetype="text" />
+			<el-input v-model="ruleForm.mima" autocomplete="off" placeholder="密码" type="password" />
 			</el-form-item>
 			<el-form-item label="确认密码" class="input" v-if="tableName=='yonghu'">
 			  <el-input v-model="ruleForm.mima2" autocomplete="off" placeholder="确认密码" type="password"/>

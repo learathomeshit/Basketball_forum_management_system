@@ -1,58 +1,58 @@
 <template>
-  <div>
-        <div class="container loginIn">
-
-      <div :class="2 == 1 ? 'left' : 2 == 2 ? 'left center' : 'left right'">
-        <el-form class="login-form" label-position="left" :label-width="1 == 3 || 1 == 2 ? '30px': '0px'">
-          <div class="title-container"><h3 class="title">篮球论坛系统登录</h3></div>
-          <el-form-item :style='{"padding":"0","boxShadow":"0px 2px 4px rgba(0, 0, 0, 0.16)","margin":"0 0 12px 60px","borderColor":"rgba(0,0,0,0)","backgroundColor":"rgba(255, 255, 255, 1)","borderRadius":"8px","borderWidth":"0","width":"35%","borderStyle":"solid","height":"auto"}' :label="1 == 3 ? '用户名' : ''" :class="'style'+1">
-            <span v-if="1 != 3" class="svg-container" style="
-			color:#333;
-			line-height:30px;
-			font-size:14px;
-			width:30px;
-			padding:0;
-			margin:0;
-			radius:0;
-			border-width:0;
-			border-style:solid;
-			border-color:rgba(0,0,0,0);
-			background-color:rgba(0,0,0,0);
-			box-shadow:0 0 6px rgba(0,0,0,0);
-			}"><svg-icon icon-class="user" /></span>
-            <el-input placeholder="请输入用户名" name="username" type="text" v-model="rulesForm.username" />
-          </el-form-item>
-          <el-form-item :style='{"padding":"0","boxShadow":"0px 2px 4px rgba(0, 0, 0, 0.16)","margin":"0 0 12px 60px","borderColor":"rgba(0,0,0,0)","backgroundColor":"rgba(255, 255, 255, 1)","borderRadius":"8px","borderWidth":"0","width":"35%","borderStyle":"solid","height":"auto"}' :label="1 == 3 ? '密码' : ''" :class="'style'+1">
-            <span v-if="1 != 3" class="svg-container" style="color:#333;
-			line-height:30px;
-			font-size:14px;
-			width:30px;
-			padding:0;
-			margin:0;
-			radius:0;
-			border-width:0;
-			border-style:solid;
-			border-color:rgba(0,0,0,0);
-			background-color:rgba(0,0,0,0);
-			box-shadow:0 0 6px rgba(0,0,0,0);"><svg-icon icon-class="password" /></span>
-            <el-input placeholder="请输入密码" name="password" type="password" v-model="rulesForm.password" />
-          </el-form-item>
-          <el-form-item label="角色" prop="loginInRole" class="role" style="display: flex;align-items: center;">
-            <el-radio
-              v-for="item in menus"
-	      v-if="item.hasBackLogin=='是'"
-              v-bind:key="item.roleName"
-              v-model="rulesForm.role"
-              :label="item.roleName"
-            >{{item.roleName}}</el-radio>
-          </el-form-item>
-          <el-button type="primary" @click="login()" class="loginInBt">{{'1' == '1' ? '登录' : 'login'}}</el-button>
-          <el-form-item class="setting">
-            <!-- <div style="color:${template2.back.login.loginInSettingFontColor}" class="reset">修改密码</div> -->
-          </el-form-item>
-        </el-form>
+  <div class="admin-login-page">
+    <div class="admin-login-bg" aria-hidden="true" />
+    <div class="admin-login-card">
+      <div class="admin-login-brand">
+        <h1 class="admin-login-title">篮球论坛系统</h1>
+        <p class="admin-login-sub">管理后台 · 安全登录</p>
       </div>
-
+      <el-form
+        ref="loginForm"
+        class="admin-login-form"
+        label-width="0"
+      >
+        <el-form-item class="admin-field">
+          <span class="svg-wrap">
+            <svg-icon icon-class="user" />
+          </span>
+          <el-input
+            v-model="rulesForm.username"
+            name="username"
+            type="text"
+            auto-complete="on"
+            placeholder="请输入用户名"
+          />
+        </el-form-item>
+        <el-form-item class="admin-field">
+          <span class="svg-wrap">
+            <svg-icon icon-class="password" />
+          </span>
+          <el-input
+            v-model="rulesForm.password"
+            name="password"
+            type="password"
+            auto-complete="on"
+            placeholder="请输入密码"
+            show-password
+            @keyup.enter.native="login"
+          />
+        </el-form-item>
+        <el-form-item class="admin-role-row">
+          <span class="role-label">角色</span>
+          <el-radio-group v-model="rulesForm.role" class="role-group">
+            <el-radio
+              v-for="item in backLoginMenus"
+              :key="item.roleName"
+              :label="item.roleName"
+            >{{ item.roleName }}</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-button
+          class="admin-login-btn"
+          native-type="button"
+          @click="login()"
+        >登录</el-button>
+      </el-form>
     </div>
   </div>
 </template>
@@ -97,7 +97,16 @@ export default {
   mounted() {
 	let menus = menu.list();
 	this.menus = menus;
+	const backRoles = menus.filter(m => m.hasBackLogin === '是');
+	if (backRoles.length === 1) {
+	  this.rulesForm.role = backRoles[0].roleName;
+	}
 	  },
+  computed: {
+    backLoginMenus() {
+      return this.menus.filter(m => m.hasBackLogin === '是');
+    }
+  },
   created() {
     this.getRandCode()
 	
@@ -107,7 +116,6 @@ export default {
       this.$storage.set("loginTable", tableName);
       this.$router.push({path:'/register'})
     },
-    // 登陆
     login() {
       if (!this.rulesForm.username) {
          this.$message.error("请输入用户名");
@@ -159,22 +167,18 @@ export default {
 
       let output = [];
       for (let i = 0; i < len; i++) {
-        // 随机验证码
         let key = Math.floor(Math.random()*chars.length)
         this.codes[i].num = chars[key]
-        // 随机验证码颜色
         let code = '#'
         for (let j = 0; j < 6; j++) {
           let key = Math.floor(Math.random()*colors.length)
           code += colors[key]
         }
         this.codes[i].color = code
-        // 随机验证码方向
         let rotate = Math.floor(Math.random()*60)
         let plus = Math.floor(Math.random()*2)
         if(plus == 1) rotate = '-'+rotate
         this.codes[i].rotate = 'rotate('+rotate+'deg)'
-        // 随机验证码字体大小
         let size = Math.floor(Math.random()*sizes.length)
         this.codes[i].size = sizes[size]+'px'
       }
@@ -183,381 +187,166 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.loginIn {
+.admin-login-page {
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
   position: relative;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-      background-image: url(http://codegen.caihongy.cn/20220103/635c577d35364085a400f562f2fc063b.png);
-    
+  overflow: hidden;
+  background: #0a0a0c;
+}
 
-  .loginInBt {
-    width: 200px;
-    height: 200px;
-    line-height: 200px;
-    margin: -150px 0 0 62%;
-    padding: 0;
-    color: rgba(255, 255, 255, 1);
-    font-size: 40px;
-    border-radius: 50%;
-    border-width: 0;
-    border-style: solid;
-    border-color: rgba(64, 158, 255, 1);
-    background-color: rgba(0, 73, 142, 1);
-    box-shadow: 0px 0px 0px 30px rgba(255,255,255,1);
-  }
-  .register {
-    width: auto;
-    height: 24px;
-    line-height: 24px;
-    margin: 0 0 0 40px;
-    padding: 0 10px;
-    color: rgba(153, 153, 153, 1);
-    font-size: 12px;
-    border-radius: 0;
-    border-width: 0;
-    border-style: solid;
-    border-color: rgba(64, 158, 255, 1);
-    background-color: rgba(255, 255, 255, 0);
-    box-shadow: 0 0 6px rgba(255,0,0,0);
-	cursor: pointer;
-  }
-  .reset {
-    width: auto;
-    height: 24px;
-    line-height: 24px;
-    margin: 0;
-    padding: 0;
-    color: rgba(153, 153, 153, 1);
-    font-size: 12px;
-    border-radius: 0;
-    border-width: 0;
-    border-style: solid;
-    border-color: rgba(64, 158, 255, 1);
-    background-color: rgba(255, 255, 255, 0);
-    box-shadow: 0 0 6px rgba(255,0,0,0);
-  }
+.admin-login-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(225, 6, 0, 0.28), transparent 55%),
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.04) 40px, rgba(255, 255, 255, 0.04) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255, 255, 255, 0.04) 40px, rgba(255, 255, 255, 0.04) 41px);
+  pointer-events: none;
+}
 
+.admin-login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 36px 40px 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(18, 18, 22, 0.88);
+  box-shadow:
+    0 0 0 1px rgba(225, 6, 0, 0.12),
+    0 28px 56px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px);
+}
 
-  .left {
+.admin-login-brand {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.admin-login-title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #f9fafb;
+}
+
+.admin-login-sub {
+  margin: 0;
+  font-size: 13px;
+  color: #9ca3af;
+  letter-spacing: 0.12em;
+}
+
+.admin-login-form {
+  width: 100%;
+}
+
+.admin-field {
+  position: relative;
+  margin-bottom: 18px !important;
+
+  .svg-wrap {
     position: absolute;
-    left: 0;
-    top: 0;
-	box-sizing: border-box;
-	width: 700px;
-	height: 400px;
-	margin: 0 auto;
-	padding: 0 12px;
-	border-radius: 45px;
-	border-width: 0;
-	border-style: solid;
-	border-color: rgba(0,0,0,.3);
-	background-color: rgba(255, 255, 255, 0.7);
-	box-shadow: 0 0 0px rgba(30, 144, 255, .8);
-
-    .login-form {
-      background-color: transparent;
-      width: 100%;
-      right: inherit;
-      padding: 0;
-      box-sizing: border-box;
-      display: flex;
-	  position: initial;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    .title-container {
-      text-align: center;
-      font-size: 24px;
-
-      .title {
-        width: 80%;
-        line-height: 30px;
-        margin: -134px auto 50px;
-        padding: 15px 0;
-        color: rgba(0, 73, 142, 1);
-        font-size: 24px;
-        border-radius: 30px 30px 0 0;
-        border-width: 0;
-        border-style: solid;
-        border-color: rgba(0,0,0,.3);
-        background-color: rgba(255, 255, 255, 0.7);
-        box-shadow: 0 0 6px rgba(0,0,0,0);
-      }
-    }
-
-    .el-form-item {
-      position: relative;
-
-      & /deep/ .el-form-item__content {
-        line-height: initial;
-      }
-
-	  & /deep/ .el-radio__label {
-	    width: auto;
-	    height: 14px;
-	    line-height: 14px;
-	    margin: 0;
-	    padding: 0 0 0 10px;
-	    color: rgba(130, 130, 130, 1);
-	    font-size: 14px;
-	    border-radius: 0;
-	    border-width: 0;
-	    border-style: solid;
-	    border-color: rgba(255, 255, 255, 0);
-	    background-color: rgba(255, 255, 255, 0);
-	    box-shadow: 0 0 6px rgba(255,0,0,0);
-	    text-align: left;
-	  }
-	  & /deep/ .el-radio.is-checked .el-radio__label {
-	    width: auto;
-	    height: 14px;
-	    line-height: 14px;
-	    margin: 0;
-	    padding: 0 0 0 10px;
-	    color: rgba(0, 73, 142, 1);
-	    font-size: 14px;
-	    border-radius: 0;
-	    border-width: 0;
-	    border-style: solid;
-	    border-color: rgba(255, 255, 255, 0);
-	    background-color: rgba(255, 255, 255, 0);
-	    box-shadow: 0 0 6px rgba(255,0,0,0);
-	    text-align: left;
-	  }
-	  & /deep/ .el-radio__inner {
-	    width: 14px;
-	    height: 14px;
-	    margin: 0;
-	    padding: 0;
-	    border-radius: 100%;
-	    border-width: 1px;
-	    border-style: solid;
-	    border-color: rgba(130, 130, 130, 1);
-	    background-color: rgba(255, 255, 255, 1);
-	    box-shadow: 0 0 6px rgba(255,0,0,0);
-	  }
-	  & /deep/ .el-radio.is-checked .el-radio__inner {
-	    width: 14px;
-	    height: 14px;
-	    margin: 0;
-	    padding: 0;
-	    border-radius: 100%;
-	    border-width: 1px;
-	    border-style: solid;
-	    border-color: rgba(0, 73, 142, 1);
-	    background-color: rgba(0, 73, 142, 1);
-	    box-shadow: 0 0 6px rgba(255,0,0,0);
-	  }
-
-      .svg-container {
-        padding: 6px 5px 6px 15px;
-        color: #889aa4;
-        vertical-align: middle;
-        display: inline-block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 1;
-        padding: 0;
-        line-height: 40px;
-        width: 30px;
-        text-align: center;
-      }
-
-      .el-input {
-        display: inline-block;
-        // height: 40px;
-        width: 100%;
-
-        & /deep/ input {
-          background: transparent;
-          border: 0px;
-          -webkit-appearance: none;
-          padding: 0 15px 0 30px;
-          color: #fff;
-          height: 40px;
-
-		  width: 100%;
-		  height: 30px;
-		  line-height: 30px;
-		  margin: 0;
-		  padding: 0 30px;
-		  color: rgba(0, 0, 0, 1);
-		  font-size: 16px;
-		  border-radius: 0;
-		  border-width: 0;
-		  border-style: solid;
-		  border-color: rgba(0,0,0,0);
-		  background-color: rgba(0,0,0,0);
-		  box-shadow: 0 0 6px rgba(255,0,0,0);
-        }
-      }
-
-    }
-
-
-  }
-
-  .center {
-    position: absolute;
-    left: 50%;
+    left: 12px;
     top: 50%;
-    transform: translate3d(-50%,-50%,0);
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    color: #9ca3af;
+    font-size: 16px;
   }
 
-  .right {
-    position: absolute;
-    left: inherit;
-    right: 0;
-    top: 0;
+  & /deep/ .el-form-item__content {
+    line-height: normal;
   }
 
-  .code {
-    .el-form-item__content {
-      position: relative;
+  & /deep/ .el-input__inner {
+    height: 46px;
+    line-height: 46px;
+    padding-left: 42px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.35);
+    color: #f3f4f6;
+    font-size: 15px;
 
-      .getCodeBt {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translate3d(0, -50%, 0);
-        line-height: 40px;
-        width: 100px;
-        background-color: rgba(51,51,51,0.4);
-        color: #fff;
-        text-align: center;
-        border-radius: 0 4px 4px 0;
-        height: 40px;
-        overflow: hidden;
-		padding: 0;
-		margin: 0;
-		width: 100px;
-        height: 30px;
-        line-height: 30px;
-        border-radius: 0;
-        border-width: 0;
-        border-style: solid;
-        border-color: rgba(64, 158, 255, 1);
-        background-color: rgba(51, 51, 51, 0.4);
-        box-shadow: 0 0 6px rgba(255,0,0,0);
+    &::placeholder {
+      color: #6b7280;
+    }
 
-        span {
-          padding: 0 5px;
-          display: inline-block;
-          font-size: 16px;
-          font-weight: 600;
-        }
-      }
-
-      .el-input {
-        & /deep/ input {
-          padding: 0 130px 0 30px;
-        }
-      }
+    &:focus {
+      border-color: rgba(225, 6, 0, 0.55);
     }
   }
+}
 
-  .setting {
-    & /deep/ .el-form-item__content {
-      // padding: 0 15px;
-      box-sizing: border-box;
-      line-height: 32px;
-      height: 32px;
-      font-size: 14px;
-      color: #999;
-      margin: 0 !important;
-	  display: flex;
+.admin-role-row {
+  margin-bottom: 22px !important;
 
-      .register {
-        // float: left;
-        // width: 50%;
-		text-align: center;
-      }
-
-      .reset {
-        float: right;
-        width: 50%;
-        text-align: right;
-      }
-    }
+  & /deep/ .el-form-item__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+    line-height: normal;
   }
+}
 
-  .style2 {
-    padding-left: 30px;
+.role-label {
+  flex: 0 0 auto;
+  font-size: 14px;
+  color: #9ca3af;
+}
 
-    .svg-container {
-      left: -30px !important;
-    }
+.role-group {
+  flex: 1;
+  min-width: 0;
+}
 
-    .el-input {
-      & /deep/ input {
-        padding: 0 15px !important;
-      }
-    }
-  }
+.admin-role-row & /deep/ .el-radio {
+  margin-right: 16px;
+  color: #d1d5db;
+}
 
-  .code.style2, .code.style3 {
-    .el-input {
-      & /deep/ input {
-        padding: 0 115px 0 15px;
-      }
-    }
-  }
+.admin-role-row & /deep/ .el-radio__input.is-checked + .el-radio__label {
+  color: #fff;
+}
 
-  .style3 {
-    & /deep/ .el-form-item__label {
-      padding-right: 6px;
-      height: 30px;
-      line-height: 30px;
-    }
+.admin-role-row & /deep/ .el-radio__inner {
+  border-color: #6b7280;
+}
 
-    .el-input {
-      & /deep/ input {
-        padding: 0 15px !important;
-      }
-    }
-  }
-  
-  & /deep/ .el-form-item__label {
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	margin: 0;
-	padding: 0;
-	color: #333;
-	font-size: 14px;
-	border-radius: 0;
-	border-width: 0;
-	border-style: solid;
-	border-color: rgba(0,0,0,0);
-	background-color: rgba(0,0,0,0);
-	box-shadow: 0 0 6px rgba(0,0,0,0);
-  }
+.admin-role-row & /deep/ .el-radio__input.is-checked .el-radio__inner {
+  border-color: #e10600;
+  background: #e10600;
+}
 
-  .role {
-    & /deep/ .el-form-item__label {
-      width: 56px !important;
-      height: 30px;
-      line-height: 30px;
-      margin: 0 0 12px 35px;
-      padding: 0;
-      color: rgba(153, 153, 153, 1);
-      font-size: 14px;
-      border-radius: 0;
-      border-width: 0;
-      border-style: solid;
-      border-color: rgba(64, 158, 255, 1);
-      background-color: rgba(255, 255, 255, 0);
-      box-shadow: 0 0 6px rgba(255,0,0,0);
-      text-align: left;
-    }
+.admin-login-btn.el-button {
+  width: 100%;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ff1a1a, #c40000);
+  box-shadow: 0 10px 28px rgba(225, 6, 0, 0.35);
 
-    & /deep/ .el-radio {
-      margin-right: 12px;
-    }
+  &:hover,
+  &:focus {
+    color: #fff;
+    background: linear-gradient(180deg, #ff3d3d, #d60000);
+    border-color: transparent;
   }
 }
 </style>

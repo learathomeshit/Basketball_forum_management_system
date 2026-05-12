@@ -72,6 +72,79 @@
 		.news-container .btn-container button i {
 			margin-right: 4px;
 		}
+
+		/* 区块标题：更大、层次更清晰 */
+		.news-page-section-head {
+			min-height: 112px;
+			padding: 28px 32px !important;
+			margin: 20px auto 14px !important;
+		}
+		.news-page-section-head span {
+			display: block;
+		}
+		.news-page-section-head span:first-of-type {
+			font-size: 12px;
+			letter-spacing: 0.28em;
+			text-transform: uppercase;
+			font-family: Georgia, "Times New Roman", serif;
+			opacity: 0.75;
+			margin-bottom: 10px;
+		}
+		.news-page-section-head span:last-of-type {
+			font-size: 26px;
+			font-weight: 700;
+			letter-spacing: 0.06em;
+		}
+
+		/* 文章标题区：整体更紧凑 */
+		.news-article-title-card {
+			box-sizing: border-box;
+			width: 980px;
+			max-width: calc(100% - 32px);
+			margin: 0 auto 16px;
+			padding: 14px 20px 12px;
+			text-align: center;
+			background: var(--ui-card, #fff);
+			border: 1px solid var(--ui-border, #e5e7eb);
+			border-radius: 8px;
+			border-left: 4px solid var(--ui-accent, #e10600);
+		}
+		.news-detail-heading {
+			margin: 0 0 8px;
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 1.45;
+			color: var(--ui-text, #111827);
+		}
+		.news-article-title-card .auth-container {
+			margin-top: 0 !important;
+			padding-bottom: 0 !important;
+			border-bottom: none !important;
+			font-size: 13px;
+		}
+
+		/* 底部「本篇文章」条：垂直居中 */
+		.news-detail-footer-bar {
+			display: flex !important;
+			align-items: center !important;
+			justify-content: space-between !important;
+			flex-wrap: wrap;
+			gap: 12px;
+			min-height: 56px;
+			height: auto !important;
+			padding: 12px 16px !important;
+		}
+		.news-detail-footer-bar .title {
+			flex: 1;
+			min-width: 200px;
+			margin: 0 !important;
+			line-height: 1.4;
+			display: flex;
+			align-items: center;
+			text-align: left;
+			font-size: 15px !important;
+			color: var(--ui-subtext, #6b7280) !important;
+		}
 	</style>
 	<body style="padding-bottom: 10px;">
 
@@ -86,14 +159,16 @@
 				</div>
 			  </div>
 			</div>
-			<div class="index-title" :style='{"padding":"10px","boxShadow":"0 0 0px rgba(255,0,0,.8)","margin":"20px auto","borderColor":"rgba(184, 145, 104, 1)","backgroundColor":"rgba(97, 132, 150, 1)","color":"#333","borderRadius":"14px","borderWidth":"5px","fontSize":"20px","borderStyle":"solid","height":"auto"}'>
+			<div class="index-title news-page-section-head" :style='{"padding":"28px 32px","boxShadow":"0 0 0px rgba(255,0,0,.8)","margin":"20px auto 14px","borderColor":"rgba(184, 145, 104, 1)","backgroundColor":"rgba(97, 132, 150, 1)","color":"#333","borderRadius":"14px","borderWidth":"5px","fontSize":"20px","borderStyle":"solid","height":"auto"}'>
 			  <span>NEWS / INFORMATION</span><span>篮球资讯</span>
 			</div>
 
 			<div class="news-container">
-				<h1 class="title">{{detail.title}}</h1>
-				<div class="auth-container">
-					时间：{{detail.addtime}}
+				<div class="news-article-title-card">
+					<h1 class="news-detail-heading">{{detail.title}}</h1>
+					<div class="auth-container">
+						时间：{{detail.addtime}}
+					</div>
 				</div>
 				<div class="content" style="word-break: break-all;" v-html="detail.content">
 				</div>
@@ -106,8 +181,8 @@
 						返回列表
 					</div>
 				</div> -->
-				<div class="btn-container" :style='{"padding":"10px","boxShadow":"0 0 0px rgba(255,0,0,.8)","margin":"10px 0 10px 0","borderColor":"rgba(0,0,0,.3)","backgroundColor":"rgba(184, 145, 104, 1)","borderRadius":"4px","alignItems":"flex-end","borderWidth":"0","borderStyle":"solid","justifyContent":"flex-end","height":"60px"}'>
-					<div class="title" style="font-size: 18px;color:#999;">
+				<div class="btn-container news-detail-footer-bar" :style='{"padding":"12px 16px","boxShadow":"0 0 0px rgba(255,0,0,.8)","margin":"10px 0 10px 0","borderColor":"rgba(0,0,0,.3)","backgroundColor":"rgba(184, 145, 104, 1)","borderRadius":"8px","alignItems":"center","borderWidth":"0","borderStyle":"solid","justifyContent":"space-between","height":"auto"}'>
+					<div class="title">
 						本篇文章：{{detail.title}}
 					</div>
 					<button :style='{"padding":"0 15px","boxShadow":"0 0 8px rgba(0,0,0,0)","margin":"0 0 0 10px","borderColor":"#409EFF","backgroundColor":"rgba(97, 132, 150, 1)","color":"#fff","borderRadius":"4px","borderWidth":"0","width":"auto","fontSize":"14px","borderStyle":"solid","height":"40px"}' onclick="back()" type="button" class="layui-btn layui-btn-lg btn-theme">

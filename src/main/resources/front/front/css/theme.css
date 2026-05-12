@@ -327,6 +327,17 @@ body {
 	color: var(--ui-text) !important;
 }
 
+/* 资讯/论坛底部条摘要：不用全局 .title 卡片样式，避免挤压 flex 垂直居中 */
+.news-container .btn-container .news-footer-summary,
+.forum-container .btn-container .news-footer-summary {
+	color: var(--ui-subtext) !important;
+	font-weight: 500 !important;
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	border-radius: 0 !important;
+}
+
 .news-container .auth-container,
 .forum-container .auth-container {
 	border-bottom: 1px solid var(--ui-border) !important;

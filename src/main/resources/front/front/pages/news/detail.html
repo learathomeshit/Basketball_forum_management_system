@@ -56,18 +56,20 @@
 		}
 		
 		.news-container .content {
+			width: 980px;
+			max-width: calc(100% - 32px);
 			margin: 30px auto;
 		}
 		
 		.news-container .btn-container {
 			display: flex;
-			    align-items: center;
-			    box-sizing: border-box;
-			    width: 100%;
-			    flex-wrap: wrap;
-				width: 980px !important;
-				    margin: 0 auto !important;
-				    justify-content: space-between !important;
+			align-items: center;
+			box-sizing: border-box;
+			flex-wrap: wrap;
+			width: 980px !important;
+			max-width: calc(100% - 32px) !important;
+			margin: 0 auto !important;
+			justify-content: space-between !important;
 		}
 		.news-container .btn-container button i {
 			margin-right: 4px;
@@ -183,8 +185,9 @@
 				</div>
 			  </div>
 			</div>
-			<div class="index-title news-page-section-head" :style='{"padding":"32px 28px","boxShadow":"none","margin":"20px auto 12px","borderColor":"transparent","backgroundColor":"transparent","color":"inherit","borderRadius":"8px","borderWidth":"0","fontSize":"inherit","borderStyle":"solid","height":"auto"}'>
-			  <span>NEWS / INFORMATION</span><span>篮球资讯</span>
+			<div class="news-article-title-card" style="margin-top: 20px;">
+			  <span style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; font-family: Georgia, 'Times New Roman', serif; opacity: 0.75; margin-bottom: 4px; color: #111827;">NEWS / INFORMATION</span>
+			  <span style="font-size: 20px; font-weight: 700; letter-spacing: 0.06em; color: #111827;">篮球资讯</span>
 			</div>
 
 			<div class="news-container">

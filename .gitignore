@@ -34,3 +34,6 @@ upload/
 *.jpg
 *.png
 *.jpeg
+
+# 忽略配置文件，防止密码泄露
+application.yml
